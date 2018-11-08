@@ -1,0 +1,11 @@
+numpy
+pandas
+ipython
+flask
+gunicorn
+sphinx
+pudb
+pytest
+pytest-pep8
+pytest-cov
+pytest-pudb
