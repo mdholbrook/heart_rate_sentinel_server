@@ -4,6 +4,8 @@ ipython
 flask
 gunicorn
 sphinx
+sphinxcontrib-napoleon
+sphinx_rtd_theme
 pudb
 pytest
 pytest-pep8
