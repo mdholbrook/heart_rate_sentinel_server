@@ -1,61 +1,61 @@
 import re
 
 
-def verify_new_patient(dict):
+def verify_new_patient(df):
     """verifies that new patient information is in the correct format
 
-    This function tests that they input dictionary is a dictionary, contains
+    This function tests that the input data is a dictionary, contains
     the required keys, has a valid email, and that the patient's age is a valid
     integer.
 
     Args:
-        dict (dict): input dictionary for a new patient
+        df (dict): input dictionary for a new patient
 
     Returns:
         bool: True if passes all tests
     """
 
-    # Find if dict is a dictionary
-    if not is_dictionary(dict):
+    # Find if df is a dictionary
+    if not is_dictionary(df):
         raise ValueError('Input new patient data is not a dictionary!')
 
     # Ensure the required keys exist
     required_keys = ['patient_id', 'attending_email', 'user_age']
 
     for required_key in required_keys:
-        if not contains_key(required_key, dict):
+        if not contains_key(required_key, df):
             raise ValueError('Input new patient dictionary is missing key %s!'
                              % required_key)
 
     # Check that the email is valid
-    email = dict[required_keys[1]]
+    email = df[required_keys[1]]
     if not valid_email(email):
         raise ValueError('Input email address (%s) is invalid!'
                          % email)
 
     # Check that age is a valid number, convert to int
-    age = dict[required_keys[2]]
-    t, dict[required_keys[2]] = is_numeric(age)
+    age = df[required_keys[2]]
+    t, df[required_keys[2]] = is_numeric(age)
     if not t:
         raise ValueError('Input age (%s) must be an integer!' % age)
 
 
-def verify_input_hr(dict):
+def verify_input_hr(df):
 
-    # Find if dict is a dictionary
-    if not is_dictionary(dict):
+    # Find if df is a dictionary
+    if not is_dictionary(df):
         raise ValueError('Input heart rate data is not a dictionary!')
 
     # Ensure the required keys exist
     required_keys = ['patient_id', 'heart_rate']
 
     for required_key in required_keys:
-        if not contains_key(required_key, dict):
+        if not contains_key(required_key, df):
             raise ValueError('Input dictionary is missing key %s!'
                              % required_key)
 
     # Check that the heart rate is valid
-    hr = dict[required_keys[1]]
+    hr = df[required_keys[1]]
     if not hr_validation(hr):
         raise ValueError('Input heart rate (%d) is not within possible ranges!'
                          % hr)
@@ -80,18 +80,18 @@ def is_dictionary(df):
         return False
 
 
-def contains_key(required_key, dict):
+def contains_key(required_key, df):
     """Checks if the required key is found in the input dictionary
 
     Args:
         required_key (str): a required key
-        dict (dict): the input dictionary being checked
+        df (dict): the input dictionary being checked
 
     Returns:
         bool: True if the input contains the required key and False otherwise
     """
 
-    if required_key in dict:
+    if required_key in df:
         return True
 
     else:
