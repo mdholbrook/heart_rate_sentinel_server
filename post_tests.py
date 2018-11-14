@@ -1,6 +1,7 @@
 import requests
 import numpy as np
 import time
+from datetime import datetime
 
 
 def my_data1():
@@ -52,7 +53,7 @@ def post_new_patient_data():
 
 def post_heart_rate_data():
 
-    for _ in range(10):
+    for _ in range(5):
         time.sleep(0.1)
         df = add_heart_rate1()
         r = requests.post("http://127.0.0.1:5000/api/heart_rate", json=df)
@@ -64,8 +65,26 @@ def post_heart_rate_data():
         print(r)
 
 
+def post_interval():
+
+    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+
+    df = {
+        "patient_id": "Ma",
+        "heart_rate_average_since": date
+        }
+    time.sleep(0.1)
+    r = requests.post(
+        "http://127.0.0.1:5000/api/heart_rate/interval_average", json=df)
+    print(r)
+
+
 if __name__ == "__main__":
 
     post_new_patient_data()
 
     post_heart_rate_data()
+
+    post_interval()
+
+    # post_heart_rate_data()

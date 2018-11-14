@@ -90,8 +90,12 @@ def internal_average():
     Returns:
 
     """
+    print('started')
+    global database
+
     # Get posted data
     inputs = request.get_json()
+    print(inputs)
 
     # Verify json has the correct fields
     verify_input_internal_average(inputs, database)
