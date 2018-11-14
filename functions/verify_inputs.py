@@ -103,6 +103,9 @@ def verify_input_internal_average(df, database):
 
     # Check that the date is in the correct format
     date = df[required_keys[1]]
+    if not type(date) == str:
+        raise ValueError("Please enter the date as a string!")
+
     if not check_date_format(date):
         raise ValueError("Entered date, %s, is not in the correct format.\n"
                          "Please enter date as: '2018_11_14 15-30-47'")
@@ -242,7 +245,7 @@ def check_date_format(date):
     """
 
     # The expression to match
-    expression = "\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{6}"
+    expression = r"\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{6}"
 
     # Find if the input date matches
     mObj = re.fullmatch(expression, date)
