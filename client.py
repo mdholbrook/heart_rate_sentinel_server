@@ -28,12 +28,8 @@ def new_patient():
 
     # Verify json has the correct fields
 
-    # Create patient
-    data = {'patient_id': inputs[0],
-            'attending_email': inputs[1],
-            'user_age': inputs[2]}
-
-    database.append(data)
+    # Append patient list
+    database.append(inputs)
 
 
 @app.route('/api/heart_rate', methods=['POST'])
@@ -55,8 +51,7 @@ def post_heart_rate():
 
     # Verify json has the correct fields
 
-    # Separate input
-    inputs
+    # Add to database
 
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])
@@ -100,7 +95,7 @@ def get_heart_rate(patient_id):
     global database
 
 
-@app.route('/api/heart_rate/average/<patient_id>', methods=['GET'])
+@app.route('/api/heart_rate/average', methods=['GET'])
 def average(patient_id):
     """Stores average of all heart rates stored for a patient.
 
