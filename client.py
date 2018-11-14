@@ -4,6 +4,7 @@ from functions.verify_inputs import patient_is_in_database
 from functions.verify_inputs import verify_input_internal_average
 from functions.hr_calculations import append_heart_rate, get_heart_rates
 from functions.hr_calculations import average_heart_rate, get_times
+from functions.hr_calculations import hr_after_time
 
 
 app = Flask(__name__)
@@ -96,11 +97,20 @@ def internal_average():
     verify_input_internal_average(inputs, database)
 
     # Get heart rates and times
-    hr = get_heart_rates(inputs['patient_id'], database)
-    times = get_times(inputs['patient_id'], database)
+    ref_time = inputs['heart_rate_average_since']
+    heart_rates = get_heart_rates(inputs['patient_id'], database)
+    timestamps = get_times(inputs['patient_id'], database)
 
     # Return heart rates after the set time
+    hr_after = hr_after_time(ref_time, timestamps, heart_rates)
 
+    # Compute the average of the returned heart rates
+    av_hr = average_heart_rate(hr_after)
+
+    # Create output message
+    message = {'average_heart_rate': av_hr}
+
+    return jsonify(message)
 
 
 @app.route('/api/status/<patient_id>', methods=['GET'])
