@@ -29,9 +29,13 @@ def new_patient():
     inputs = request.get_json()
     print(inputs)
 
-    # Verify json has the correct fields
     try:
+        # Verify json has the correct fields
         verify_new_patient(inputs)
+
+        # Add fields for timestamp and heart rate
+        inputs['time'] = []
+        inputs['heart_rate'] = []
 
         # Append patient list
         database.append(inputs)
