@@ -80,3 +80,19 @@ def create_timestamp():
     """
 
     return datetime.now().strftime("%Y_%m_%d %H-%M-%S.%f")
+
+
+def average_heart_rate(heart_rates):
+    """Calculate the average of a list of heart rates
+
+    Args:
+        heart_rates (list): a list of heart rates
+
+    Returns:
+        float: the average heart rate
+    """
+    # Compute sum and length of the input list
+    hr_sum = sum(heart_rates)
+    hr_length = len(heart_rates)
+
+    return hr_sum/hr_length
