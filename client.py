@@ -35,7 +35,8 @@ def new_patient():
         database.append(inputs)
 
         result = {
-            "message": "Added %s successfully to the patient list" % inputs["patient_id"]
+            "message": "Added %s successfully to the patient list"
+                       % inputs["patient_id"]
         }
         print(result)
 
