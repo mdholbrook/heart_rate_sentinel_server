@@ -23,7 +23,7 @@ def verify_new_patient(dict):
     required_keys = ['patient_id', 'attending_email', 'user_age']
 
     for required_key in required_keys:
-        if contains_key(required_key, dict):
+        if not contains_key(required_key, dict):
             raise ValueError('Input dictionary is missing key %s!'
                              % required_key)
 
@@ -34,8 +34,8 @@ def verify_new_patient(dict):
                          % email)
 
     # Check that age is a valid number, convert to int
-    age = dict[required_keys[3]]
-    t, dict[required_keys[3]] = is_numeric(age)
+    age = dict[required_keys[2]]
+    t, dict[required_keys[2]] = is_numeric(age)
     if not t:
         raise ValueError('Input age (%s) must be an integer!' %age)
 
