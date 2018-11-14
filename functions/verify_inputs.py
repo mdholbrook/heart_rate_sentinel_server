@@ -17,14 +17,14 @@ def verify_new_patient(dict):
 
     # Find if dict is a dictionary
     if not is_dictionary(dict):
-        raise ValueError('Input data is not a dictionary!')
+        raise ValueError('Input new patient data is not a dictionary!')
 
     # Ensure the required keys exist
     required_keys = ['patient_id', 'attending_email', 'user_age']
 
     for required_key in required_keys:
         if not contains_key(required_key, dict):
-            raise ValueError('Input dictionary is missing key %s!'
+            raise ValueError('Input new patient dictionary is missing key %s!'
                              % required_key)
 
     # Check that the email is valid
@@ -38,6 +38,28 @@ def verify_new_patient(dict):
     t, dict[required_keys[2]] = is_numeric(age)
     if not t:
         raise ValueError('Input age (%s) must be an integer!' % age)
+
+
+def verify_input_hr(dict):
+
+    # Find if dict is a dictionary
+    if not is_dictionary(dict):
+        raise ValueError('Input heart rate data is not a dictionary!')
+
+    # Ensure the required keys exist
+    required_keys = ['patient_id', 'heart_rate']
+
+    for required_key in required_keys:
+        if not contains_key(required_key, dict):
+            raise ValueError('Input dictionary is missing key %s!'
+                             % required_key)
+
+    # Check that age is a valid number, convert to int
+    hr = dict[required_keys[1]]
+    t, dict[required_keys[1]] = is_numeric(hr)
+    if not t:
+        raise ValueError('Input heart rate (%s) must be an number '
+                         '(int)!' % hr)
 
 
 def is_dictionary(df):
