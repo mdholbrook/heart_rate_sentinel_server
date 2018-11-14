@@ -82,7 +82,7 @@ def post_heart_rate():
               % (inputs['heart_rate'], inputs['patient_id'])
     print(message)
 
-    return 'Success', 200
+    return jsonify({'Success': 200})
 
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])

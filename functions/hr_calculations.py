@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def append_heart_rate(df, database):
     """Appends the input heart rate to the patient in the database
 
@@ -59,3 +62,13 @@ def get_heart_rates(p_id, database):
 
     # Return stored heart rate measurements
     return database[ind]['heart_rate']
+
+
+def create_time_step():
+    """Creates a timestamp for the heart rate measurement
+
+    Returns:
+        str: date and time, eg. '2018_11_14 15-30-47'
+    """
+
+    return datetime.now().strftime("%Y_%m_%d %H-%M-%S")
