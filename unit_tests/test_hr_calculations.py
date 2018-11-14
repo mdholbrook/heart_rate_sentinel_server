@@ -34,6 +34,7 @@ def test_get_heart_rates(candidate, database, expected):
     ])
 def test_average_heart_rate(candidate, expected):
 
+    # Run the test
     assert pytest.approx(average_heart_rate(candidate), 1e-2) == expected
 
 
@@ -43,4 +44,5 @@ def test_average_heart_rate(candidate, expected):
     ])
 def test_get_date_as_numeric(candidate, expected):
 
+    # Run the test
     assert get_date_as_numeric(candidate) == expected
