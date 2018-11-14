@@ -158,6 +158,12 @@ def hr_after_time(ref_time, timestamps, heart_rates):
     for dt in timestamps:
         num_time.append(get_date_as_numeric(dt))
 
+    # Ensure that there are more recent timestamps than the ref_time
+    t = check_recent_timestamps(num_time, num_in_time)
+    if not t:
+        raise ValueError('Input time (%s) is larger than last recorded time '
+                         '(%s)' % (ref_time, timestamps[-1]))
+
     # Find first date after input date
     ind = find_index_larger(num_time, num_in_time)
 
@@ -177,3 +183,16 @@ def find_index_larger(times, ref_time):
     """
 
     return next(i[0] for i in enumerate(times) if i[1] > ref_time)
+
+
+def check_recent_timestamps(times, ref_time):
+
+    # Get last recorded time
+    last_time = times[-1]
+
+    # If the time is less recent than the ref_time
+    if last_time < ref_time:
+        return False
+
+    else:
+        return True
