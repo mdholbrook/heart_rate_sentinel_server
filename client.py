@@ -118,10 +118,10 @@ def get_heart_rate(patient_id):
     """Shows all recorded heart rates for a patient
 
     Args:
-        patient_id:
+        patient_id (str): the patient ID to which to show recorded heart rates
 
     Returns:
-
+        json: message showing all recorded heart rates for a patient
     """
     # Check if patient is in database
     if not patient_is_in_database(patient_id, database):
