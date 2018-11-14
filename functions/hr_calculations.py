@@ -79,4 +79,4 @@ def create_timestamp():
         str: date and time, eg. '2018_11_14 15-30-47'
     """
 
-    return datetime.now().strftime("%Y_%m_%d %H-%M-%S")
+    return datetime.now().strftime("%Y_%m_%d %H-%M-%S.%f")
