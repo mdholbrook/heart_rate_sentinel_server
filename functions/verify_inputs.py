@@ -108,7 +108,7 @@ def verify_input_internal_average(df, database):
 
     if not check_date_format(date):
         raise ValueError("Entered date, %s, is not in the correct format.\n"
-                         "Please enter date as: '2018_11_14 15-30-47'")
+                         "Please enter date as: '2018-03-09 11:00:36.372339'")
 
 
 def is_dictionary(df):
@@ -235,8 +235,8 @@ def patient_is_in_database(p_id, database):
 
 def check_date_format(date):
     """Checks the formatting of the posted date
-    The date should be in the format: "%Y_%m_%d %H-%M-%S.%f" (eg.
-    '2018_11_14 15-30-47'). Returns False if this is not the case.
+    The date should be in the format: "%Y-%m-%d %H:%M:%S.%f" (eg.
+    '2018-03-09 11:00:36.372339'). Returns False if this is not the case.
     Args:
         date (str): input date as a string
 

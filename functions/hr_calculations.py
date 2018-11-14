@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 
 
 def append_heart_rate(df, database):
@@ -76,10 +77,10 @@ def create_timestamp():
     """Creates a timestamp for the heart rate measurement
 
     Returns:
-        str: date and time, eg. '2018_11_14 15-30-47'
+        str: date and time, eg. "2018-03-09 11:00:36.372339"
     """
 
-    return datetime.now().strftime("%Y_%m_%d %H-%M-%S.%f")
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
 
 
 def average_heart_rate(heart_rates):
@@ -96,3 +97,23 @@ def average_heart_rate(heart_rates):
     hr_length = len(heart_rates)
 
     return hr_sum/hr_length
+
+
+def get_date_as_numeric(date):
+    """Takes the date as a string and returns it as a float
+    The input date is converted to seconds for comparison with other dates
+
+    Args:
+        date (str): the date as a string "%Y-%m-%d %H:%M:%S.%f",
+        eg "2018-03-09 11:00:36.372339"
+
+    Returns:
+        float: time in seconds
+    """
+    # Expression to match
+    expression = "%Y-%m-%d %H:%M:%S.%f"
+
+    # Convert date to seconds
+    seconds = time.mktime(datetime.strptime(date, expression).timetuple())
+
+    return seconds
