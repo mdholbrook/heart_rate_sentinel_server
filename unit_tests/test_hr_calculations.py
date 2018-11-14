@@ -38,10 +38,9 @@ def test_average_heart_rate(candidate, expected):
 
 
 @pytest.mark.parametrize("candidate, expected", [
-    ([50, 60, 70], 1520611236.0),
-    ([50, 55, 56], 53.66),
-    ([0, 50, 100], 50),
+    ('2018-03-09 11:00:36.372339', 1520611236.372339),
+    ('2017-10-19 15:11:36.167854', 1508440296.167854),
     ])
 def test_get_date_as_numeric(candidate, expected):
 
-    assert pytest.approx(get_date_as_numeric(candidate), 1e-2) == expected
+    assert get_date_as_numeric(candidate) == expected
