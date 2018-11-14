@@ -40,3 +40,12 @@ def find_id_ind(p_id, database):
         raise ValueError('The input ID (%s) is not in the database!' % p_id)
 
     return inds
+
+
+def get_heart_rates(p_id, database):
+
+    # Get index in list for patient
+    ind = find_id_ind(p_id, database)
+
+    # Return stored heart rate measurements
+    return database[ind]['heart_rate']
