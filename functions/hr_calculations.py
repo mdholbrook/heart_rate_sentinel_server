@@ -43,6 +43,16 @@ def find_id_ind(p_id, database):
 
 
 def get_heart_rates(p_id, database):
+    """Takes a patient ID and returns all recorded heart rate information
+
+    Args:
+        p_id (str): the patient ID to use for heart rate retrieval
+        database (list of dict): the database containing all patient
+            information
+
+    Returns:
+        list: a list of all heart rates recorded for a given patient
+    """
 
     # Get index in list for patient
     ind = find_id_ind(p_id, database)
