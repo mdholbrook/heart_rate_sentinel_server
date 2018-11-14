@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from functions.verify_inputs import verify_new_patient, verify_input_hr
+from functions.hr_calculations import append_heart_rate
 
 
 app = Flask(__name__)
@@ -69,7 +70,7 @@ def post_heart_rate():
     verify_input_hr(inputs, database)
 
     # Add to database
-    database.append(inputs)
+    append_heart_rate(inputs, database)
 
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])

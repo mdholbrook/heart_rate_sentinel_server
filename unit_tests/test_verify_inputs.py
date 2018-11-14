@@ -72,4 +72,4 @@ def test_hr_validation(candidate, expected):
 def test_patient_is_in_database(candidate, database, expected):
 
     # Run the test
-    patient_is_in_database(candidate, database) == expected
+    assert patient_is_in_database(candidate, database) == expected
