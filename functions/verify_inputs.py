@@ -54,12 +54,11 @@ def verify_input_hr(dict):
             raise ValueError('Input dictionary is missing key %s!'
                              % required_key)
 
-    # Check that age is a valid number, convert to int
+    # Check that the heart rate is valid
     hr = dict[required_keys[1]]
-    t, dict[required_keys[1]] = is_numeric(hr)
-    if not t:
-        raise ValueError('Input heart rate (%s) must be an number '
-                         '(int)!' % hr)
+    if not hr_validation(hr):
+        raise ValueError('Input heart rate (%d) is not within possible ranges!'
+                         % hr)
 
 
 def is_dictionary(df):
@@ -145,3 +144,25 @@ def is_numeric(num):
 
     else:
         return True, int(num)
+
+
+def hr_validation(hr):
+    """Validates that the given heart rate is within physiological ranges
+
+    Source for heart rate bounds: https://iytmed.com/dangerous-heart-rate/
+
+    Args:
+        hr (int): input heart rate in bmp
+
+    Returns:
+        bool: True if heart rate is within possible bounds
+    """
+
+    hr_upper_bound = 480    # Ventricular tachycardia
+    hr_lower_bound = 0      # Deceased
+
+    if hr_lower_bound <= hr < hr_upper_bound:
+        return True
+
+    else:
+        return False
