@@ -188,7 +188,7 @@ def hr_validation(hr):
 def patient_is_in_database(p_id, database):
 
     # Get a list of IDs in database
-    ids = [database[i]['patient_ids'] for i in range(len(database))]
+    ids = [database[i]['patient_id'] for i in range(len(database))]
 
     # Find index of current ID
     try:

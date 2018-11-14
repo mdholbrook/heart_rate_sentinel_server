@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def append_heart_rate(df, database):
     """Appends the input heart rate to the patient in the database
 
@@ -15,6 +18,14 @@ def append_heart_rate(df, database):
     # Append heart rate to database
     database[ind]['heart_rate'].append(df['heart_rate'])
 
+    # Append timestamp
+    timestamp = create_timestamp()
+    database[ind]['time'].append(timestamp)
+
+    message = 'Added the heart rate %d to patient %s at %s' \
+              % (df['heart_rate'], df['patient_id'], timestamp)
+    print(message)
+
     return database
 
 
@@ -30,7 +41,7 @@ def find_id_ind(p_id, database):
     """
 
     # Get a list of IDs in database
-    ids = [database[i]['patient_ids'] for i in range(len(database))]
+    ids = [database[i]['patient_id'] for i in range(len(database))]
 
     # Find index of current ID
     try:
@@ -40,3 +51,32 @@ def find_id_ind(p_id, database):
         raise ValueError('The input ID (%s) is not in the database!' % p_id)
 
     return inds
+
+
+def get_heart_rates(p_id, database):
+    """Takes a patient ID and returns all recorded heart rate information
+
+    Args:
+        p_id (str): the patient ID to use for heart rate retrieval
+        database (list of dict): the database containing all patient
+            information
+
+    Returns:
+        list: a list of all heart rates recorded for a given patient
+    """
+
+    # Get index in list for patient
+    ind = find_id_ind(p_id, database)
+
+    # Return stored heart rate measurements
+    return database[ind]['heart_rate']
+
+
+def create_timestamp():
+    """Creates a timestamp for the heart rate measurement
+
+    Returns:
+        str: date and time, eg. '2018_11_14 15-30-47'
+    """
+
+    return datetime.now().strftime("%Y_%m_%d %H-%M-%S")

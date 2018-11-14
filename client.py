@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from functions.verify_inputs import verify_new_patient, verify_input_hr
-from functions.hr_calculations import append_heart_rate
+from functions.verify_inputs import patient_is_in_database
+from functions.hr_calculations import append_heart_rate, get_heart_rates
+from functions.hr_calculations import create_timestamp
 
 
 app = Flask(__name__)
@@ -28,9 +30,13 @@ def new_patient():
     inputs = request.get_json()
     print(inputs)
 
-    # Verify json has the correct fields
     try:
-        verify_new_patient(inputs)
+        # Verify json has the correct fields
+        verify_new_patient(inputs, database)
+
+        # Add fields for timestamp and heart rate
+        inputs['time'] = []
+        inputs['heart_rate'] = []
 
         # Append patient list
         database.append(inputs)
@@ -71,6 +77,8 @@ def post_heart_rate():
 
     # Add to database
     append_heart_rate(inputs, database)
+
+    return jsonify({'Success': 200})
 
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])
@@ -115,7 +123,16 @@ def get_heart_rate(patient_id):
     Returns:
 
     """
-    global database
+    # Check if patient is in database
+    if not patient_is_in_database(patient_id, database):
+        message = {'message': 'Patient %s not found in the database!'
+                              % patient_id}
+    else:
+
+        hr = get_heart_rates(patient_id, database)
+        message = {'heart_rates': hr}
+
+    return jsonify(message)
 
 
 @app.route('/api/heart_rate/average', methods=['GET'])
