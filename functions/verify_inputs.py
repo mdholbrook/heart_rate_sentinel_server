@@ -110,7 +110,7 @@ def is_numeric(num):
     t = type(num)
 
     # If the number was input as a string
-    if t == 'str':
+    if t == str:
         if num.isnumeric():
             return True, int(num)
 
