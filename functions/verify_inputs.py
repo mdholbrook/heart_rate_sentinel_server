@@ -40,11 +40,12 @@ def verify_new_patient(df, database):
     if not t:
         raise ValueError('Input age (%s) must be an integer!' % age)
 
-    # Check that patient exists in the database
-    p_id = df[required_keys[0]]
-    if patient_is_in_database(p_id, database):
-        raise ValueError('The input patient ID (%s) is already in the '
-                         'database!' % p_id)
+    # Check if patient exists in the database
+    if len(database) > 0:
+        p_id = df[required_keys[0]]
+        if patient_is_in_database(p_id, database):
+            raise ValueError('The input patient ID (%s) is already in the '
+                             'database!' % p_id)
 
 
 def verify_input_hr(df, database):
@@ -68,9 +69,13 @@ def verify_input_hr(df, database):
                          % hr)
 
     # Check that patient exists in the database
-    p_id = df[required_keys[0]]
-    if not patient_is_in_database(p_id, database):
-        raise ValueError('The input ID (%s) is not in the database!' % p_id)
+    if len(database) > 0:
+        p_id = df[required_keys[0]]
+        if not patient_is_in_database(p_id, database):
+            raise ValueError('The input ID (%s) is not in the database!'
+                             % p_id)
+    else:
+        raise LookupError('There are not patients entered in the directory!')
 
 
 def is_dictionary(df):
