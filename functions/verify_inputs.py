@@ -72,10 +72,40 @@ def verify_input_hr(df, database):
     if len(database) > 0:
         p_id = df[required_keys[0]]
         if not patient_is_in_database(p_id, database):
-            raise ValueError('The input ID (%s) is not in the database!'
-                             % p_id)
+            raise ValueError('The input patient ID (%s) is not in the '
+                             'database!' % p_id)
     else:
-        raise LookupError('There are not patients entered in the directory!')
+        raise LookupError('There are no patients entered in the directory!')
+
+
+def verify_input_internal_average(df, database):
+
+    # Find if df is a dictionary
+    if not is_dictionary(df):
+        raise ValueError('Input heart rate data is not a dictionary!')
+
+    # Ensure the required keys exist
+    required_keys = ['patient_id', 'heart_rate_average_since']
+
+    for required_key in required_keys:
+        if not contains_key(required_key, df):
+            raise ValueError('Input dictionary is missing key %s!'
+                             % required_key)
+
+    # Check that patient exists in the database
+    if len(database) > 0:
+        p_id = df[required_keys[0]]
+        if not patient_is_in_database(p_id, database):
+            raise ValueError('The input patient ID (%s) is not in the '
+                             'database!' % p_id)
+    else:
+        raise LookupError('There are no patients entered in the directory!')
+
+    # Check that the date is in the correct format
+    date = df[required_keys[1]]
+    if not check_date_format(date):
+        raise ValueError("Entered date, %s, is not in the correct format.\n"
+                         "Please enter date as: '2018_11_14 15-30-47'")
 
 
 def is_dictionary(df):
@@ -198,3 +228,27 @@ def patient_is_in_database(p_id, database):
         return False
 
     return True
+
+
+def check_date_format(date):
+    """Checks the formatting of the posted date
+    The date should be in the format: "%Y_%m_%d %H-%M-%S.%f" (eg.
+    '2018_11_14 15-30-47'). Returns False if this is not the case.
+    Args:
+        date (str): input date as a string
+
+    Returns:
+        bool: True is the date is in the correct format
+    """
+
+    # The expression to match
+    expression = "\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{6}"
+
+    # Find if the input date matches
+    mObj = re.fullmatch(expression, date)
+
+    if mObj:
+        return True
+
+    else:
+        return False
