@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from functions.verify_inputs import verify_new_patient, verify_input_hr
 from functions.verify_inputs import patient_is_in_database
 from functions.hr_calculations import append_heart_rate, get_heart_rates
+from functions.hr_calculations import create_timestamp
 
 
 app = Flask(__name__)
@@ -76,11 +77,6 @@ def post_heart_rate():
 
     # Add to database
     append_heart_rate(inputs, database)
-
-    # Ouptput message
-    message = 'Added the heart rate %d to patient %s' \
-              % (inputs['heart_rate'], inputs['patient_id'])
-    print(message)
 
     return jsonify({'Success': 200})
 

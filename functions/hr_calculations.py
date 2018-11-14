@@ -18,6 +18,14 @@ def append_heart_rate(df, database):
     # Append heart rate to database
     database[ind]['heart_rate'].append(df['heart_rate'])
 
+    # Append timestamp
+    timestamp = create_timestamp()
+    database[ind]['time'].append(timestamp)
+
+    message = 'Added the heart rate %d to patient %s at %s' \
+              % (df['heart_rate'], df['patient_id'], timestamp)
+    print(message)
+
     return database
 
 
@@ -64,7 +72,7 @@ def get_heart_rates(p_id, database):
     return database[ind]['heart_rate']
 
 
-def create_time_step():
+def create_timestamp():
     """Creates a timestamp for the heart rate measurement
 
     Returns:

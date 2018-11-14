@@ -66,5 +66,3 @@ if __name__ == "__main__":
     post_new_patient_data()
 
     post_heart_rate_data()
-
-
