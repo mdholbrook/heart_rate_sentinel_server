@@ -89,7 +89,7 @@ def valid_email(email):
         bool: True if the input is a valid email and False otherwise
     """
     # Find @ and . in the email address
-    if re.match("^@]+@[^@]+\.[^@]+", email):
+    if re.match("^@]+@[^@]+\\.[^@]+", email):
         return True
 
     else:
