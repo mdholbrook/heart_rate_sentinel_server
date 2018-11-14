@@ -1,10 +1,19 @@
-def append_heart_rate(dict, database):
+def append_heart_rate(df, database):
+    """Appends the input heart rate to the patient in the database
+
+    Args:
+        df (dict): input dictionary of patient_id and heart_rate
+        database (list of dict): list containing all patient data
+
+    Returns:
+        list: updates database to include the send heart rate
+    """
 
     # Get patient index in database
-    ind = find_id_ind(dict['patient_id'], database)
+    ind = find_id_ind(df['patient_id'], database)
 
     # Append heart rate to database
-    database[ind]['heart_rate'].append(dict['heart_rate'])
+    database[ind]['heart_rate'].append(df['heart_rate'])
 
     return database
 
