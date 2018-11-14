@@ -63,3 +63,13 @@ def test_hr_validation(candidate, expected):
 
     # Run the test
     assert hr_validation(candidate) == expected
+
+
+@pytest.mark.parametrize("candidate, database, expected", [
+    ('jack', [{'patient_ids': 'jump'}, {'patient_ids': 'jack'}], True),
+    ('jungle', [{'patient_ids': 'jungle'}, {'patient_ids': 'jack'}], True),
+    ('john', [{'patient_ids': 'james'}], False)])
+def test_patient_is_in_database(candidate, database, expected):
+
+    # Run the test
+    patient_is_in_database(candidate, database) == expected

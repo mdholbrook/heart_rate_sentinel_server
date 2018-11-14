@@ -66,7 +66,7 @@ def post_heart_rate():
     inputs = request.get_json()
 
     # Verify json has the correct fields
-    verify_input_hr(inputs)
+    verify_input_hr(inputs, database)
 
     # Add to database
     database.append(inputs)

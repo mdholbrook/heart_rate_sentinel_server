@@ -18,11 +18,11 @@ def append_heart_rate(df, database):
     return database
 
 
-def find_id_ind(id, database):
+def find_id_ind(p_id, database):
     """Finds the index of the input patient in the database
 
     Args:
-        id (str): the input patient ID
+        p_id (str): the input patient ID
         database (list of dict): Contains all entered patients
 
     Returns:
@@ -34,9 +34,9 @@ def find_id_ind(id, database):
 
     # Find index of current ID
     try:
-        inds = ids.index(id)
+        inds = ids.index(p_id)
 
     except ValueError:
-        raise ValueError('The input ID (%s) is not in the database!' % id)
+        raise ValueError('The input ID (%s) is not in the database!' % p_id)
 
     return inds

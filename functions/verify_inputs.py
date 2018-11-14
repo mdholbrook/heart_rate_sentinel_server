@@ -40,7 +40,7 @@ def verify_new_patient(df):
         raise ValueError('Input age (%s) must be an integer!' % age)
 
 
-def verify_input_hr(df):
+def verify_input_hr(df, database):
 
     # Find if df is a dictionary
     if not is_dictionary(df):
@@ -59,6 +59,11 @@ def verify_input_hr(df):
     if not hr_validation(hr):
         raise ValueError('Input heart rate (%d) is not within possible ranges!'
                          % hr)
+
+    # Check that patient exists in the database
+    p_id = df[required_keys[0]]
+    if not patient_is_in_database(p_id, database):
+        raise ValueError('The input ID (%s) is not in the database!' % p_id)
 
 
 def is_dictionary(df):
@@ -166,3 +171,18 @@ def hr_validation(hr):
 
     else:
         return False
+
+
+def patient_is_in_database(p_id, database):
+
+    # Get a list of IDs in database
+    ids = [database[i]['patient_ids'] for i in range(len(database))]
+
+    # Find index of current ID
+    try:
+        ids.index(p_id)
+
+    except ValueError:
+        return False
+
+    return True
