@@ -50,3 +50,16 @@ def test_is_numeric(candidate, expected):
 
     # Run the test
     assert valid_email(candidate) == expected
+
+
+@pytest.mark.parametrize("candidate, expected", [
+    (60, True),
+    (0, True),
+    (-1, False),
+    (120, True),
+    (500, False)
+    ])
+def test_hr_validation(candidate, expected):
+
+    # Run the test
+    assert hr_validation(candidate) == expected
