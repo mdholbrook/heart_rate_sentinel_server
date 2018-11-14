@@ -1,43 +1,81 @@
 import re
 
 
-def verify_new_patient(dict):
+def verify_new_patient(df, database):
     """verifies that new patient information is in the correct format
 
-    This function tests that they input dictionary is a dictionary, contains
+    This function tests that the input data is a dictionary, contains
     the required keys, has a valid email, and that the patient's age is a valid
     integer.
 
     Args:
-        dict (dict): input dictionary for a new patient
+        df (dict): input dictionary for a new patient
+        database (list of dict): full list of patient data
 
     Returns:
         bool: True if passes all tests
     """
 
-    # Find if dict is a dictionary
-    if not is_dictionary(dict):
-        raise ValueError('Input data is not a dictionary!')
+    # Find if df is a dictionary
+    if not is_dictionary(df):
+        raise ValueError('Input new patient data is not a dictionary!')
 
     # Ensure the required keys exist
     required_keys = ['patient_id', 'attending_email', 'user_age']
 
     for required_key in required_keys:
-        if not contains_key(required_key, dict):
-            raise ValueError('Input dictionary is missing key %s!'
+        if not contains_key(required_key, df):
+            raise ValueError('Input new patient dictionary is missing key %s!'
                              % required_key)
 
     # Check that the email is valid
-    email = dict[required_keys[1]]
+    email = df[required_keys[1]]
     if not valid_email(email):
         raise ValueError('Input email address (%s) is invalid!'
                          % email)
 
     # Check that age is a valid number, convert to int
-    age = dict[required_keys[2]]
-    t, dict[required_keys[2]] = is_numeric(age)
+    age = df[required_keys[2]]
+    t, df[required_keys[2]] = is_numeric(age)
     if not t:
         raise ValueError('Input age (%s) must be an integer!' % age)
+
+    # Check if patient exists in the database
+    if len(database) > 0:
+        p_id = df[required_keys[0]]
+        if patient_is_in_database(p_id, database):
+            raise ValueError('The input patient ID (%s) is already in the '
+                             'database!' % p_id)
+
+
+def verify_input_hr(df, database):
+
+    # Find if df is a dictionary
+    if not is_dictionary(df):
+        raise ValueError('Input heart rate data is not a dictionary!')
+
+    # Ensure the required keys exist
+    required_keys = ['patient_id', 'heart_rate']
+
+    for required_key in required_keys:
+        if not contains_key(required_key, df):
+            raise ValueError('Input dictionary is missing key %s!'
+                             % required_key)
+
+    # Check that the heart rate is valid
+    hr = df[required_keys[1]]
+    if not hr_validation(hr):
+        raise ValueError('Input heart rate (%d) is not within possible ranges!'
+                         % hr)
+
+    # Check that patient exists in the database
+    if len(database) > 0:
+        p_id = df[required_keys[0]]
+        if not patient_is_in_database(p_id, database):
+            raise ValueError('The input ID (%s) is not in the database!'
+                             % p_id)
+    else:
+        raise LookupError('There are not patients entered in the directory!')
 
 
 def is_dictionary(df):
@@ -59,18 +97,18 @@ def is_dictionary(df):
         return False
 
 
-def contains_key(required_key, dict):
+def contains_key(required_key, df):
     """Checks if the required key is found in the input dictionary
 
     Args:
         required_key (str): a required key
-        dict (dict): the input dictionary being checked
+        df (dict): the input dictionary being checked
 
     Returns:
         bool: True if the input contains the required key and False otherwise
     """
 
-    if required_key in dict:
+    if required_key in df:
         return True
 
     else:
@@ -123,3 +161,40 @@ def is_numeric(num):
 
     else:
         return True, int(num)
+
+
+def hr_validation(hr):
+    """Validates that the given heart rate is within physiological ranges
+
+    Source for heart rate bounds: https://iytmed.com/dangerous-heart-rate/
+
+    Args:
+        hr (int): input heart rate in bmp
+
+    Returns:
+        bool: True if heart rate is within possible bounds
+    """
+
+    hr_upper_bound = 480    # Ventricular tachycardia
+    hr_lower_bound = 0      # Deceased
+
+    if hr_lower_bound <= hr < hr_upper_bound:
+        return True
+
+    else:
+        return False
+
+
+def patient_is_in_database(p_id, database):
+
+    # Get a list of IDs in database
+    ids = [database[i]['patient_ids'] for i in range(len(database))]
+
+    # Find index of current ID
+    try:
+        ids.index(p_id)
+
+    except ValueError:
+        return False
+
+    return True

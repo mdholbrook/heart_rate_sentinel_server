@@ -1,10 +1,11 @@
 from flask import Flask, jsonify, request
-from functions.verify_inputs import verify_new_patient
+from functions.verify_inputs import verify_new_patient, verify_input_hr
+from functions.hr_calculations import append_heart_rate
 
 
 app = Flask(__name__)
 
-# Make database in memory
+# Make database in global memory
 database = []
 
 
@@ -66,10 +67,10 @@ def post_heart_rate():
     inputs = request.get_json()
 
     # Verify json has the correct fields
-    verify_new_patient(inputs)
+    verify_input_hr(inputs, database)
 
     # Add to database
-    database.append(inputs)
+    append_heart_rate(inputs, database)
 
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])

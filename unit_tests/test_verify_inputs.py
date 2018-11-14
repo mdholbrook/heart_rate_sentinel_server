@@ -50,3 +50,26 @@ def test_is_numeric(candidate, expected):
 
     # Run the test
     assert valid_email(candidate) == expected
+
+
+@pytest.mark.parametrize("candidate, expected", [
+    (60, True),
+    (0, True),
+    (-1, False),
+    (120, True),
+    (500, False)
+    ])
+def test_hr_validation(candidate, expected):
+
+    # Run the test
+    assert hr_validation(candidate) == expected
+
+
+@pytest.mark.parametrize("candidate, database, expected", [
+    ('jack', [{'patient_ids': 'jump'}, {'patient_ids': 'jack'}], True),
+    ('jungle', [{'patient_ids': 'jungle'}, {'patient_ids': 'jack'}], True),
+    ('john', [{'patient_ids': 'james'}], False)])
+def test_patient_is_in_database(candidate, database, expected):
+
+    # Run the test
+    assert patient_is_in_database(candidate, database) == expected
