@@ -58,3 +58,18 @@ def test_get_times(candidate, expected):
 
     # Run the test
     assert get_times(candidate, database) == expected
+
+
+@pytest.mark.parametrize("ref_time, times, hr, expected", [
+    ('2018-03-09 11:00:36.372339',
+     ['2018-03-09 11:00:34.372339',
+      '2018-03-09 11:00:35.372339',
+      '2018-03-09 11:00:36.872339'], [0, 0, 0], [0]),
+    ('2018-03-09 11:00:36.372339',
+     ['2018-03-09 11:00:35.372339',
+      '2018-03-09 11:00:36.372359',
+      '2018-03-09 11:00:37.372339'], [0, 0, 0], [0, 0])])
+def test_hr_after_time(ref_time, times, hr, expected):
+
+    # Run the test
+    assert hr_after_time(ref_time, times, hr) == expected
