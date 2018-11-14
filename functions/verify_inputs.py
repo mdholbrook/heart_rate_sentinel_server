@@ -37,7 +37,7 @@ def verify_new_patient(dict):
     age = dict[required_keys[2]]
     t, dict[required_keys[2]] = is_numeric(age)
     if not t:
-        raise ValueError('Input age (%s) must be an integer!' %age)
+        raise ValueError('Input age (%s) must be an integer!' % age)
 
 
 def is_dictionary(df):
