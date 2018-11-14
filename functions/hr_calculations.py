@@ -114,6 +114,6 @@ def get_date_as_numeric(date):
     expression = "%Y-%m-%d %H:%M:%S.%f"
 
     # Convert date to seconds
-    seconds = time.mktime(datetime.strptime(date, expression).timetuple())
+    seconds = datetime.strptime(date, expression).timestamp()
 
     return seconds
