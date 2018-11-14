@@ -31,7 +31,7 @@ def new_patient():
 
     try:
         # Verify json has the correct fields
-        verify_new_patient(inputs)
+        verify_new_patient(inputs, database)
 
         # Add fields for timestamp and heart rate
         inputs['time'] = []
@@ -76,6 +76,13 @@ def post_heart_rate():
 
     # Add to database
     append_heart_rate(inputs, database)
+
+    # Ouptput message
+    message = 'Added the heart rate %d to patient %s' \
+              % (inputs['heart_rate'], inputs['patient_id'])
+    print(message)
+
+    return 'Success', 200
 
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])
