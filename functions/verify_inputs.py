@@ -52,7 +52,7 @@ def is_dictionary(df):
 
     t = type(df)
 
-    if t == 'dict':
+    if t == dict:
         return True
 
     else:
