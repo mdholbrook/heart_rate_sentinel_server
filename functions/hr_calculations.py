@@ -139,6 +139,9 @@ def get_times(p_id, database):
 
 def hr_after_time(ref_time, timestamps, heart_rates):
     """Gather the heart rates after a reference point in time
+    Converts string dates to a numeric in seconds, then checks that there are
+    recorded values occurring after the reference time. Returns a list of heart
+    rate measurements after ref_time.
 
     Args:
         ref_time (str): the date and time as input by the user
@@ -186,6 +189,15 @@ def find_index_larger(times, ref_time):
 
 
 def check_recent_timestamps(times, ref_time):
+    """Checks if the input time is too recent and precludes all measurements
+
+    Args:
+        times (list): list of times, in seconds float, in which recordings were made
+        ref_time (float): input reference time in seconds
+
+    Returns:
+        bool: returns True if there are more recent measurements than ref_time
+    """
 
     # Get last recorded time
     last_time = times[-1]
