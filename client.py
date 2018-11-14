@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request
 from functions.verify_inputs import verify_new_patient, verify_input_hr
 from functions.verify_inputs import patient_is_in_database
+from functions.verify_inputs import verify_input_internal_average
 from functions.hr_calculations import append_heart_rate, get_heart_rates
-from functions.hr_calculations import average_heart_rate
+from functions.hr_calculations import average_heart_rate, get_times
 
 
 app = Flask(__name__)
@@ -88,12 +89,18 @@ def internal_average():
     Returns:
 
     """
-    global database
-
     # Get posted data
     inputs = request.get_json()
 
     # Verify json has the correct fields
+    verify_input_internal_average(inputs, database)
+
+    # Get heart rates and times
+    hr = get_heart_rates(inputs['patient_id'], database)
+    times = get_times(inputs['patient_id'], database)
+
+    # Return heart rates after the set time
+
 
 
 @app.route('/api/status/<patient_id>', methods=['GET'])

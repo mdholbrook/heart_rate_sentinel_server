@@ -117,3 +117,63 @@ def get_date_as_numeric(date):
     seconds = datetime.strptime(date, expression).timestamp()
 
     return seconds
+
+
+def get_times(p_id, database):
+    """Retrieve the timestamps for each heart rate recorded
+
+    Args:
+        p_id (str): a string identifying the patient
+        database (list of dict): contains all patient data
+
+    Returns:
+        list: a list of timestamps pertaining to the patient
+    """
+
+    # Get index in list for patient
+    ind = find_id_ind(p_id, database)
+
+    # Return stored heart rate measurements
+    return database[ind]['time']
+
+
+def hr_after_time(ref_time, timestamps, heart_rates):
+    """Gather the heart rates after a reference point in time
+
+    Args:
+        ref_time (str): the date and time as input by the user
+        timestamps (list): a list of strings of the timestamps denoting when
+            heart rate information was encountered.
+        heart_rates (list) : a list of recorded heart rates
+
+    Returns:
+        list: a list of heart rates recorded after ref_time
+    """
+
+    # Get input date as a numeric
+    num_in_time = get_date_as_numeric(ref_time)
+
+    # Get timestamps as a numeric
+    num_time = []
+    for dt in timestamps:
+        num_time.append(get_date_as_numeric(dt))
+
+    # Find first date after input date
+    ind = find_index_larger(num_time, num_in_time)
+
+    # Return the heart rate after ind
+    return heart_rates[ind:]
+
+
+def find_index_larger(times, ref_time):
+    """Returns the index of times whose value is just larger than ref_time
+
+    Args:
+        times (list): A list of floats denoting a datestring in seconds
+        ref_time (float): A input date in seconds
+
+    Returns:
+        int: the index which is just larger than ref_time
+    """
+
+    return next(i[0] for i in enumerate(times) if i[1] > ref_time)
