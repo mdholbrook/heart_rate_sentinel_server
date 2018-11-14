@@ -73,3 +73,14 @@ def test_hr_after_time(ref_time, times, hr, expected):
 
     # Run the test
     assert hr_after_time(ref_time, times, hr) == expected
+
+
+@pytest.mark.parametrize("times, ref_time, expected", [
+    ([0, 1, 2, 3, 4], 3, 4),
+    ([0, 1, 2, 3, 4], 2.5, 3),
+    ([0, 1, 2, 3, 4], 1.5, 2)
+    ])
+def test_find_index_larger(ref_time, times, expected):
+
+    # Run the test
+    assert find_index_larger(times, ref_time) == expected
