@@ -1,7 +1,7 @@
 import re
 
 
-def verify_new_patient(df):
+def verify_new_patient(df, database):
     """verifies that new patient information is in the correct format
 
     This function tests that the input data is a dictionary, contains
@@ -10,6 +10,7 @@ def verify_new_patient(df):
 
     Args:
         df (dict): input dictionary for a new patient
+        database (list of dict): full list of patient data
 
     Returns:
         bool: True if passes all tests
@@ -38,6 +39,12 @@ def verify_new_patient(df):
     t, df[required_keys[2]] = is_numeric(age)
     if not t:
         raise ValueError('Input age (%s) must be an integer!' % age)
+
+    # Check that patient exists in the database
+    p_id = df[required_keys[0]]
+    if patient_is_in_database(p_id, database):
+        raise ValueError('The input patient ID (%s) is already in the '
+                         'database!' % p_id)
 
 
 def verify_input_hr(df, database):
