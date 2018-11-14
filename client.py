@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from functions.verify_inputs import verify_new_patient, verify_input_hr
-from functions.hr_calculations import append_heart_rate
+from functions.verify_inputs import patient_is_in_database
+from functions.hr_calculations import append_heart_rate, get_heart_rates
 
 
 app = Flask(__name__)
@@ -115,7 +116,16 @@ def get_heart_rate(patient_id):
     Returns:
 
     """
-    global database
+    # Check if patient is in database
+    if not patient_is_in_database(patient_id, database):
+        message = {'message': 'Patient %s not found in the database!'
+                              % patient_id}
+    else:
+
+        hr = get_heart_rates(patient_id, database)
+        message = {'heart_rates': hr}
+
+    return jsonify(message)
 
 
 @app.route('/api/heart_rate/average', methods=['GET'])
