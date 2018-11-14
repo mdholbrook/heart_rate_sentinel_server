@@ -30,7 +30,7 @@ def find_id_ind(p_id, database):
     """
 
     # Get a list of IDs in database
-    ids = [database[i]['patient_ids'] for i in range(len(database))]
+    ids = [database[i]['patient_id'] for i in range(len(database))]
 
     # Find index of current ID
     try:
