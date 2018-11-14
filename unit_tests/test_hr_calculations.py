@@ -84,3 +84,15 @@ def test_find_index_larger(ref_time, times, expected):
 
     # Run the test
     assert find_index_larger(times, ref_time) == expected
+
+
+@pytest.mark.parametrize("times, ref_time, expected", [
+    ([0, 1, 2, 3, 4], 3, True),
+    ([0, 1, 2, 3, 4], 4, True),
+    ([0, 1, 2, 3, 4], 4.5, False),
+    ([0, 1, 2, 3, 4], 0, True)
+    ])
+def test_check_recent_timestamps(ref_time, times, expected):
+
+    # Run the test
+    assert check_recent_timestamps(times, ref_time) == expected
