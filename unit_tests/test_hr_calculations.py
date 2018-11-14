@@ -25,3 +25,13 @@ def test_get_heart_rates(candidate, database, expected):
 
     # Run the test
     assert get_heart_rates(candidate, database) == expected
+
+
+@pytest.mark.parametrize("candidate, expected", [
+    ([50, 60, 70], 60),
+    ([50, 55, 56], 53.66),
+    ([0, 50, 100], 50),
+    ])
+def test_average_heart_rate(candidate, expected):
+
+    assert pytest.approx(average_heart_rate(candidate), 1e-2) == expected

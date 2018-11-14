@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from functions.verify_inputs import verify_new_patient, verify_input_hr
 from functions.verify_inputs import patient_is_in_database
 from functions.hr_calculations import append_heart_rate, get_heart_rates
-from functions.hr_calculations import create_timestamp
+from functions.hr_calculations import average_heart_rate
 
 
 app = Flask(__name__)
@@ -118,10 +118,10 @@ def get_heart_rate(patient_id):
     """Shows all recorded heart rates for a patient
 
     Args:
-        patient_id:
+        patient_id (str): the patient ID to which to show recorded heart rates
 
     Returns:
-
+        json: message showing all recorded heart rates for a patient
     """
     # Check if patient is in database
     if not patient_is_in_database(patient_id, database):
@@ -135,17 +135,33 @@ def get_heart_rate(patient_id):
     return jsonify(message)
 
 
-@app.route('/api/heart_rate/average', methods=['GET'])
+@app.route('/api/heart_rate/average/<patient_id>', methods=['GET'])
 def average(patient_id):
-    """Stores average of all heart rates stored for a patient.
+    """Calculates the average heart rate for each patient.
+    This function works on all of the recorded heart rates (bmp) for a given
+    patient.
 
     Args:
-        patient_id:
+        patient_id (str): the patient identifier
 
     Returns:
-
+        json: returns a json dictionary with the average heart rate
     """
-    global database
+    # Check if patient is in database
+    if not patient_is_in_database(patient_id, database):
+        message = {'message': 'Patient %s not found in the database!'
+                              % patient_id}
+    else:
+
+        # Get heart rates
+        hr = get_heart_rates(patient_id, database)
+
+        # Calculate average heart rate
+        av_hr = average_heart_rate(hr)
+
+        message = {'average_heart_rate': av_hr}
+
+    return jsonify(message)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import requests
 import numpy as np
+import time
 
 
 def my_data1():
@@ -52,10 +53,12 @@ def post_new_patient_data():
 def post_heart_rate_data():
 
     for _ in range(10):
+        time.sleep(0.1)
         df = add_heart_rate1()
         r = requests.post("http://127.0.0.1:5000/api/heart_rate", json=df)
         print(r)
 
+        time.sleep(0.1)
         df = add_heart_rate2()
         r = requests.post("http://127.0.0.1:5000/api/heart_rate", json=df)
         print(r)
