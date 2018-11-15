@@ -5,12 +5,14 @@ from functions.verify_inputs import verify_input_internal_average
 from functions.hr_calculations import append_heart_rate, get_heart_rates
 from functions.hr_calculations import average_heart_rate, get_times
 from functions.hr_calculations import hr_after_time
+from functions.tachycardia import Tachycardic
 
 
 app = Flask(__name__)
 
 # Make database in global memory
 database = []
+tachy = Tachycardic()
 
 
 @app.route('/api/new_patient', methods=['POST'])
@@ -137,11 +139,18 @@ def status(patient_id):
     Returns:
 
     """
-    global database
 
-    test = {'id': 'fun', 'rank': 5}
+    # Check if patient is in database
+    if not patient_is_in_database(patient_id, database):
+        message = {'message': 'Patient %s not found in the database!'
+                              % patient_id}
+    else:
+        # Return if patient is tachycardic
+        state, timestamp = tachy.is_tachycardic(patient_id, database)
 
-    return jsonify(test)
+        message = {'is_tachycardic': state, 'timestamp': timestamp}
+
+    return jsonify(message)
 
 
 @app.route('/api/heart_rate/<patient_id>', methods=['GET'])
