@@ -73,3 +73,13 @@ def test_patient_is_in_database(candidate, database, expected):
 
     # Run the test
     assert patient_is_in_database(candidate, database) == expected
+
+
+@pytest.mark.parametrize("candidate, expected", [
+    ('January 31st, 2016', False),
+    ('2018-06-01 11:59:99.999999', True),
+    ('test', False)])
+def test_check_date_format(candidate, expected):
+
+    # Run the test
+    assert check_date_format(candidate) == expected

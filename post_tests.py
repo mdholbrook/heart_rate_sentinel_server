@@ -1,6 +1,7 @@
 import requests
 import numpy as np
 import time
+from datetime import datetime, timedelta
 
 
 def my_data1():
@@ -52,16 +53,35 @@ def post_new_patient_data():
 
 def post_heart_rate_data():
 
-    for _ in range(10):
-        time.sleep(0.1)
+    for _ in range(5):
+
         df = add_heart_rate1()
         r = requests.post("http://127.0.0.1:5000/api/heart_rate", json=df)
         print(r)
-
         time.sleep(0.1)
+
         df = add_heart_rate2()
         r = requests.post("http://127.0.0.1:5000/api/heart_rate", json=df)
         print(r)
+        time.sleep(0.2)
+
+
+def post_interval():
+
+    expression = "%Y-%m-%d %H:%M:%S.%f"
+    date = datetime.now()
+    subtract = timedelta(seconds=0)  # 1 second
+    c = date - subtract
+    c = c.strftime(expression)
+
+    df = {
+        "patient_id": "Mike",
+        "heart_rate_average_since": c
+        }
+    time.sleep(0.1)
+    r = requests.post(
+        "http://127.0.0.1:5000/api/heart_rate/internal_average", json=df)
+    print(r)
 
 
 if __name__ == "__main__":
@@ -69,3 +89,7 @@ if __name__ == "__main__":
     post_new_patient_data()
 
     post_heart_rate_data()
+
+    post_interval()
+
+    # post_heart_rate_data()

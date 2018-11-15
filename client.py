@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
 from functions.verify_inputs import verify_new_patient, verify_input_hr
 from functions.verify_inputs import patient_is_in_database
+from functions.verify_inputs import verify_input_internal_average
 from functions.hr_calculations import append_heart_rate, get_heart_rates
-from functions.hr_calculations import average_heart_rate
+from functions.hr_calculations import average_heart_rate, get_times
+from functions.hr_calculations import hr_after_time
 
 
 app = Flask(__name__)
@@ -83,7 +85,17 @@ def post_heart_rate():
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])
 def internal_average():
-    """
+    """Calculates the average heart rate for a patient after a given timestamp
+
+    This message receives a post in the following format:
+    {
+    "patient_id": "1",
+    "heart_rate_average_since": "2018-03-09 11:00:36.372339" // date string
+    }
+
+    The patient's recorded heart rates after "heart_rate_average_since" will be
+    used for calculating an average. If there are no measurements after this
+    point an warning is raised and the last recorded heart rate is returned.
 
     Returns:
 
@@ -94,6 +106,25 @@ def internal_average():
     inputs = request.get_json()
 
     # Verify json has the correct fields
+    verify_input_internal_average(inputs, database)
+
+    # Get heart rates and times
+    ref_time = inputs['heart_rate_average_since']
+    heart_rates = get_heart_rates(inputs['patient_id'], database)
+    timestamps = get_times(inputs['patient_id'], database)
+
+    # Return heart rates after the set time
+    hr_after = hr_after_time(ref_time, timestamps, heart_rates)
+
+    # Compute the average of the returned heart rates
+    av_hr = average_heart_rate(hr_after)
+
+    # Create output message
+    message = {'average_heart_rate': av_hr}
+    print('Average heart rate for patient %s since %s: %0.2f (%d measurements)'
+          % (inputs['patient_id'], ref_time, av_hr, len(hr_after)))
+
+    return jsonify(message), 200
 
 
 @app.route('/api/status/<patient_id>', methods=['GET'])
