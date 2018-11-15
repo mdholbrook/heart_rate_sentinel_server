@@ -85,7 +85,17 @@ def post_heart_rate():
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])
 def internal_average():
-    """
+    """Calculates the average heart rate for a patient after a given timestamp
+
+    This message receives a post in the following format:
+    {
+    "patient_id": "1",
+    "heart_rate_average_since": "2018-03-09 11:00:36.372339" // date string
+    }
+
+    The patient's recorded heart rates after "heart_rate_average_since" will be
+    used for calculating an average. If there are no measurements after this
+    point an warning is raised and the last recorded heart rate is returned.
 
     Returns:
 

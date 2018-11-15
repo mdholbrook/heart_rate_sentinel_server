@@ -192,7 +192,8 @@ def check_recent_timestamps(times, ref_time):
     """Checks if the input time is too recent and precludes all measurements
 
     Args:
-        times (list): list of times, in seconds float, in which recordings were made
+        times (list): list of times, in seconds float, in which recordings were
+         made
         ref_time (float): input reference time in seconds
 
     Returns:

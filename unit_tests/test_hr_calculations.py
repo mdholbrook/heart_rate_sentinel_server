@@ -53,8 +53,10 @@ def test_get_date_as_numeric(candidate, expected):
     ('Matt', ['2018-03-10 11:00:32.372339', '2017-10-19 35:11:36.167854'])
     ])
 def test_get_times(candidate, expected):
-    database = [{'patient_id': 'Mark', 'time': ['2018-03-09 11:00:36.372339', '2017-10-19 15:11:36.167854']},
-                {'patient_id': 'Matt', 'time': ['2018-03-10 11:00:32.372339', '2017-10-19 35:11:36.167854']}]
+    database = [{'patient_id': 'Mark', 'time':
+                ['2018-03-09 11:00:36.372339', '2017-10-19 15:11:36.167854']},
+                {'patient_id': 'Matt', 'time':
+                ['2018-03-10 11:00:32.372339', '2017-10-19 35:11:36.167854']}]
 
     # Run the test
     assert get_times(candidate, database) == expected
