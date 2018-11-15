@@ -6,6 +6,7 @@ from functions.hr_calculations import append_heart_rate, get_heart_rates
 from functions.hr_calculations import average_heart_rate, get_times
 from functions.hr_calculations import hr_after_time
 from functions.tachycardia import Tachycardic
+from functions.email_service import send_tachycardia_email
 
 
 app = Flask(__name__)
@@ -80,7 +81,14 @@ def post_heart_rate():
     verify_input_hr(inputs, database)
 
     # Add to database
-    append_heart_rate(inputs, database)
+    database, ind = append_heart_rate(inputs, database)
+
+    # Check if the patient is tachycardic
+    state, _ = tachy.is_tachycardic(inputs['patient_id'], database)
+
+    # If True, send an alert to the attending physician
+    if state:
+        send_tachycardia_email(database[ind])
 
     return jsonify({'Success': 200})
 
