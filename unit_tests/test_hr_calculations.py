@@ -38,14 +38,20 @@ def test_average_heart_rate(candidate, expected):
     assert pytest.approx(average_heart_rate(candidate), 1e-2) == expected
 
 
-@pytest.mark.parametrize("candidate, expected", [
-    ('2018-03-09 11:00:36.372339', 1520611236.372339),
-    ('2017-10-19 15:11:36.167854', 1508440296.167854),
+@pytest.mark.parametrize("candidate", [
+    '2018-03-09 11:00:36.372339',
+    '2017-10-19 15:11:36.167854',
     ])
-def test_get_date_as_numeric(candidate, expected):
+def test_get_date_as_numeric(candidate):
 
     # Run the test
-    assert pytest.approx(get_date_as_numeric(candidate), 1e-6) == expected
+    result = pytest.approx(get_date_as_numeric(candidate), rel=1e-6)
+
+    # Generate expected result
+    expression = "%Y-%m-%d %H:%M:%S.%f"
+    expected = datetime.strptime(candidate, expression).timestamp()
+
+    assert result == expected
 
 
 @pytest.mark.parametrize("candidate, expected", [
