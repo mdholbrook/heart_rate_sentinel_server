@@ -146,9 +146,9 @@ def status(patient_id):
                               % patient_id}
     else:
         # Return if patient is tachycardic
-        state = tachy.is_tachycardic(patient_id, database)
+        state, timestamp = tachy.is_tachycardic(patient_id, database)
 
-        message = {'is_tachycardic': state}
+        message = {'is_tachycardic': state, 'timestamp': timestamp}
 
     return jsonify(message)
 

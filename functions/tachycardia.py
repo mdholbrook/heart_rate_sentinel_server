@@ -22,6 +22,7 @@ class Tachycardic:
 
         Returns:
             bool: True if the patient is tachycardic, false otherwise
+            str: timestamp of last recorded heart rate
         """
 
         # Get the patient from the database
@@ -30,6 +31,7 @@ class Tachycardic:
         # Find the patient age and latest heart rate
         age = self.find_age(database, ind)
         hr = self.get_heart_rate(database, ind)
+        timestamp = self.get_timestamp(database, ind)
 
         # Find patient age range
         age_ind = (self.df['Year1'] <= age) & \
@@ -38,10 +40,10 @@ class Tachycardic:
 
         # Determine if the patient is tachycardic
         if hr > thresh_hr:
-            return True
+            return True, timestamp
 
         else:
-            return False
+            return False, timestamp
 
     def find_age(self, database, ind):
         """Finds the patient's age
@@ -68,3 +70,16 @@ class Tachycardic:
         """
 
         return database[ind]['heart_rate'][-1]
+
+    def get_timestamp(self, database, ind):
+        """Returns the timestamp of the last recorded heart rate
+
+        Args:
+            database (list of dict): a list of patients and their information
+            ind (int): the index of the patient in database
+
+        Returns:
+            str: timestamp from last recorded heart rate
+        """
+
+        return database[ind]['time'][-1]
