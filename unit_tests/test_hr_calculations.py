@@ -45,7 +45,7 @@ def test_average_heart_rate(candidate, expected):
 def test_get_date_as_numeric(candidate, expected):
 
     # Run the test
-    assert get_date_as_numeric(candidate) == expected
+    assert pytest.approx(get_date_as_numeric(candidate), 1e-6) == expected
 
 
 @pytest.mark.parametrize("candidate, expected", [
