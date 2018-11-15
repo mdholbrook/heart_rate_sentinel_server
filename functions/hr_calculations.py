@@ -22,12 +22,13 @@ def append_heart_rate(df, database):
     # Append timestamp
     timestamp = create_timestamp()
     database[ind]['time'].append(timestamp)
+    df['time'] = timestamp
 
     message = 'Added the heart rate %d to patient %s at %s' \
               % (df['heart_rate'], df['patient_id'], timestamp)
     print(message)
 
-    return database
+    return database, ind
 
 
 def find_id_ind(p_id, database):

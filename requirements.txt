@@ -4,6 +4,8 @@ requests
 ipython
 flask
 gunicorn
+sendgrid
+python_http_client
 sphinx
 sphinxcontrib-napoleon
 sphinx_rtd_theme
