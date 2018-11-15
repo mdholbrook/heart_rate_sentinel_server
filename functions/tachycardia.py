@@ -11,6 +11,18 @@ class Tachycardic:
         self.df = pd.read_csv(data_dir)
 
     def is_tachycardic(self, patient_id, database):
+        """Computes if the patient is tachycardic
+        This function finds the patient in the datebase, grabs the last heart
+        rate recorded, and uses the patient's age to determine if the patient
+        is tachycardic
+
+        Args:
+            patient_id (str): patient identifier
+            database (list of dict): a list of patients and their information
+
+        Returns:
+            bool: True if the patient is tachycardic, false otherwise
+        """
 
         # Get the patient from the database
         ind = find_id_ind(patient_id, database)
