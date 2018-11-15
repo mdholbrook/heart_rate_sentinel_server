@@ -1,5 +1,5 @@
 from datetime import datetime
-import time
+import warnings
 
 
 def append_heart_rate(df, database):
@@ -92,6 +92,7 @@ def average_heart_rate(heart_rates):
     Returns:
         float: the average heart rate
     """
+
     # Compute sum and length of the input list
     hr_sum = sum(heart_rates)
     hr_length = len(heart_rates)
@@ -110,6 +111,7 @@ def get_date_as_numeric(date):
     Returns:
         float: time in seconds
     """
+
     # Expression to match
     expression = "%Y-%m-%d %H:%M:%S.%f"
 
@@ -163,15 +165,19 @@ def hr_after_time(ref_time, timestamps, heart_rates):
 
     # Ensure that there are more recent timestamps than the ref_time
     t = check_recent_timestamps(num_time, num_in_time)
-    if not t:
-        raise ValueError('Input time (%s) is larger than last recorded time '
-                         '(%s)' % (ref_time, timestamps[-1]))
+    if t:
+        # Find first date after input date
+        ind = find_index_larger(num_time, num_in_time)
 
-    # Find first date after input date
-    ind = find_index_larger(num_time, num_in_time)
+        # Return the heart rate after ind
+        return heart_rates[ind:]
 
-    # Return the heart rate after ind
-    return heart_rates[ind:]
+    else:
+        warnings.warn('\nInput time (%s) is larger than last recorded time '
+                      '(%s)\nUsing last recorded time: %s'
+                      % (ref_time, timestamps[-1], timestamps[-1]))
+
+        return [heart_rates[-1]]
 
 
 def find_index_larger(times, ref_time):

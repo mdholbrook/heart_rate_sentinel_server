@@ -18,15 +18,15 @@ def verify_new_patient(df, database):
 
     # Find if df is a dictionary
     if not is_dictionary(df):
-        raise ValueError('Input new patient data is not a dictionary!')
+        raise TypeError('Input new patient data is not a dictionary!')
 
     # Ensure the required keys exist
     required_keys = ['patient_id', 'attending_email', 'user_age']
 
     for required_key in required_keys:
         if not contains_key(required_key, df):
-            raise ValueError('Input new patient dictionary is missing key %s!'
-                             % required_key)
+            raise TypeError('Input new patient dictionary is missing key %s!'
+                            % required_key)
 
     # Check that the email is valid
     email = df[required_keys[1]]
@@ -38,7 +38,7 @@ def verify_new_patient(df, database):
     age = df[required_keys[2]]
     t, df[required_keys[2]] = is_numeric(age)
     if not t:
-        raise ValueError('Input age (%s) must be an integer!' % age)
+        TypeError('Input age (%s) must be an integer!' % age)
 
     # Check if patient exists in the database
     if len(database) > 0:
