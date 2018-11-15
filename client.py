@@ -90,12 +90,10 @@ def internal_average():
     Returns:
 
     """
-    print('started')
     global database
 
     # Get posted data
     inputs = request.get_json()
-    print(inputs)
 
     # Verify json has the correct fields
     verify_input_internal_average(inputs, database)
@@ -113,8 +111,10 @@ def internal_average():
 
     # Create output message
     message = {'average_heart_rate': av_hr}
+    print('Average heart rate for patient %s since %s: %0.2f (%d measurements)'
+          % (inputs['patient_id'], ref_time, av_hr, len(hr_after)))
 
-    return jsonify(message)
+    return jsonify(message), 200
 
 
 @app.route('/api/status/<patient_id>', methods=['GET'])
