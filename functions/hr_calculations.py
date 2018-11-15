@@ -1,5 +1,9 @@
 from datetime import datetime
 import warnings
+from functions.tachycardia import Tachycardic
+from functions.email_service import send_tachycardia_email
+
+tach = Tachycardic()
 
 
 def append_heart_rate(df, database):
@@ -22,10 +26,18 @@ def append_heart_rate(df, database):
     # Append timestamp
     timestamp = create_timestamp()
     database[ind]['time'].append(timestamp)
+    df['time'] = timestamp
 
     message = 'Added the heart rate %d to patient %s at %s' \
               % (df['heart_rate'], df['patient_id'], timestamp)
     print(message)
+
+    # Check if the patient is tachycardic
+    state, _ = tach.is_tachycardic(df['patient_id'], database)
+
+    # If True, send an alert to the attending physician
+    if state:
+        send_tachycardia_email(df)
 
     return database
 

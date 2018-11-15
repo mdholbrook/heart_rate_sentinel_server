@@ -30,7 +30,7 @@ def send_tachycardia_email(df):
                                  % (df['patient_id'],
                                     df['user_age'],
                                     df['heart_rate'][-1],
-                                    df['time'][-1]))
+                                    df['time']))
 
     # Send email
     mail = Mail(from_email, subject, to_email, body)
