@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>functions package &mdash; Heart Rate Sentinel  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Heart Rate Sentinel
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">functions package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-functions.email_service">functions.email_service module</a></li>
+<li><a class="reference internal" href="#module-functions.hr_calculations">functions.hr_calculations module</a></li>
+<li><a class="reference internal" href="#module-functions.tachycardia">functions.tachycardia module</a></li>
+<li><a class="reference internal" href="#module-functions.verify_inputs">functions.verify_inputs module</a></li>
+<li><a class="reference internal" href="#module-functions">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Heart Rate Sentinel</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>functions package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/functions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="functions-package">
+<h1>functions package<a class="headerlink" href="#functions-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-functions.email_service">
+<span id="functions-email-service-module"></span><h2>functions.email_service module<a class="headerlink" href="#module-functions.email_service" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="functions.email_service.send_tachycardia_email">
+<code class="descclassname">functions.email_service.</code><code class="descname">send_tachycardia_email</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.email_service.send_tachycardia_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an email to the attending physician</p>
+<p>The email warns of a tachycardic heart rate and includes the patient ID,
+age, current heart rate, and the time that the heart rate was recorded.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>dict</em>) – dictionary containing the tachycardic patient information
+and heart rate data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-functions.hr_calculations">
+<span id="functions-hr-calculations-module"></span><h2>functions.hr_calculations module<a class="headerlink" href="#module-functions.hr_calculations" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="functions.hr_calculations.append_heart_rate">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">append_heart_rate</code><span class="sig-paren">(</span><em>df</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.append_heart_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends the input heart rate to the patient in the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>dict</em>) – input dictionary of patient_id and heart_rate</li>
+<li><strong>database</strong> (<em>list of dict</em>) – list containing all patient data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>updates database to include the heart rate, also</dt>
+<dd><p class="first last">return the index of the patient in the database so that the patient
+ID will not have to be found again for following calculations</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of dict, int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.average_heart_rate">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">average_heart_rate</code><span class="sig-paren">(</span><em>heart_rates</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.average_heart_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the average of a list of heart rates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>heart_rates</strong> (<em>list</em>) – a list of heart rates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the average heart rate</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.check_recent_timestamps">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">check_recent_timestamps</code><span class="sig-paren">(</span><em>times</em>, <em>ref_time</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.check_recent_timestamps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the input time is too recent and precludes all measurements</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>times</strong> (<em>list</em>) – list of times, in seconds float, in which recordings were
+made</li>
+<li><strong>ref_time</strong> (<em>float</em>) – input reference time in seconds</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">returns True if there are more recent measurements than ref_time</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.create_timestamp">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">create_timestamp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.create_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a timestamp for the heart rate measurement</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">date and time, eg. “2018-03-09 11:00:36.372339”</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.find_id_ind">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">find_id_ind</code><span class="sig-paren">(</span><em>p_id</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.find_id_ind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the index of the input patient in the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>p_id</strong> (<em>str</em>) – the input patient ID</li>
+<li><strong>database</strong> (<em>list of dict</em>) – Contains all entered patients</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.find_index_larger">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">find_index_larger</code><span class="sig-paren">(</span><em>times</em>, <em>ref_time</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.find_index_larger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index of times whose value is just larger than ref_time</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>times</strong> (<em>list</em>) – A list of floats denoting a datestring in seconds</li>
+<li><strong>ref_time</strong> (<em>float</em>) – A input date in seconds</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the index which is just larger than ref_time</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.get_date_as_numeric">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">get_date_as_numeric</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.get_date_as_numeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the date as a string and returns it as a float
+The input date is converted to seconds for comparison with other dates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>date</strong> (<em>str</em>) – the date as a string “%Y-%m-%d %H:%M:%S.%f”,</li>
+<li><strong>&quot;2018-03-09 11</strong> (<em>eg</em>) – 00:36.372339”</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">time in seconds</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.get_heart_rates">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">get_heart_rates</code><span class="sig-paren">(</span><em>p_id</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.get_heart_rates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a patient ID and returns all recorded heart rate information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>p_id</strong> (<em>str</em>) – the patient ID to use for heart rate retrieval</li>
+<li><strong>database</strong> (<em>list of dict</em>) – the database containing all patient
+information</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a list of all heart rates recorded for a given patient</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.get_times">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">get_times</code><span class="sig-paren">(</span><em>p_id</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.get_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the timestamps for each heart rate recorded</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>p_id</strong> (<em>str</em>) – a string identifying the patient</li>
+<li><strong>database</strong> (<em>list of dict</em>) – contains all patient data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a list of timestamps pertaining to the patient</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.hr_calculations.hr_after_time">
+<code class="descclassname">functions.hr_calculations.</code><code class="descname">hr_after_time</code><span class="sig-paren">(</span><em>ref_time</em>, <em>timestamps</em>, <em>heart_rates</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.hr_calculations.hr_after_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather the heart rates after a reference point in time
+Converts string dates to a numeric in seconds, then checks that there are
+recorded values occurring after the reference time. Returns a list of heart
+rate measurements after ref_time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ref_time</strong> (<em>str</em>) – the date and time as input by the user</li>
+<li><strong>timestamps</strong> (<em>list</em>) – a list of strings of the timestamps denoting when
+heart rate information was encountered.</li>
+<li><strong>heart_rates</strong> (<em>list</em>) – a list of recorded heart rates</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a list of heart rates recorded after ref_time</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-functions.tachycardia">
+<span id="functions-tachycardia-module"></span><h2>functions.tachycardia module<a class="headerlink" href="#module-functions.tachycardia" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="functions.tachycardia.Tachycardic">
+<em class="property">class </em><code class="descclassname">functions.tachycardia.</code><code class="descname">Tachycardic</code><a class="headerlink" href="#functions.tachycardia.Tachycardic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="functions.tachycardia.Tachycardic.find_age">
+<code class="descname">find_age</code><span class="sig-paren">(</span><em>database</em>, <em>ind</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.tachycardia.Tachycardic.find_age" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the patient’s age from the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>database</strong> (<em>list of dict</em>) – a list of patients and their information</li>
+<li><strong>ind</strong> (<em>int</em>) – the index of the patient in database</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the users age in years</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="functions.tachycardia.Tachycardic.get_heart_rate">
+<code class="descname">get_heart_rate</code><span class="sig-paren">(</span><em>database</em>, <em>ind</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.tachycardia.Tachycardic.get_heart_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the patient’s last heart rate in the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>database</strong> (<em>list of dict</em>) – a list of patients and their information</li>
+<li><strong>ind</strong> (<em>int</em>) – the index of the patient in database</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the last recorded heart rate for the patient</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="functions.tachycardia.Tachycardic.get_timestamp">
+<code class="descname">get_timestamp</code><span class="sig-paren">(</span><em>database</em>, <em>ind</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.tachycardia.Tachycardic.get_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the timestamp of the last recorded heart rate</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>database</strong> (<em>list of dict</em>) – a list of patients and their information</li>
+<li><strong>ind</strong> (<em>int</em>) – the index of the patient in database</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">timestamp from last recorded heart rate</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="functions.tachycardia.Tachycardic.is_tachycardic">
+<code class="descname">is_tachycardic</code><span class="sig-paren">(</span><em>patient_id</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.tachycardia.Tachycardic.is_tachycardic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes if the patient is tachycardic
+This function finds the patient in the datebase, grabs the last heart
+rate recorded, and uses the patient’s age to determine if the patient
+is tachycardic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>patient_id</strong> (<em>str</em>) – patient identifier</li>
+<li><strong>database</strong> (<em>list of dict</em>) – a list of patients and their information</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if the patient is tachycardic, false otherwise
+str: timestamp of last recorded heart rate</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-functions.verify_inputs">
+<span id="functions-verify-inputs-module"></span><h2>functions.verify_inputs module<a class="headerlink" href="#module-functions.verify_inputs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="functions.verify_inputs.check_date_format">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">check_date_format</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.check_date_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the formatting of the posted date</p>
+<p>The date should be in the format: “%Y-%m-%d %H:%M:%S.%f” (eg.
+‘2018-03-09 11:00:36.372339’). Returns False if this is not the case.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date</strong> (<em>str</em>) – input date as a string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True is the date is in the correct format</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.contains_key">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">contains_key</code><span class="sig-paren">(</span><em>required_key</em>, <em>df</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.contains_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the required key is found in the input dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>required_key</strong> (<em>str</em>) – a required key</li>
+<li><strong>df</strong> (<em>dict</em>) – the input dictionary being checked</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if the input contains the required key and False otherwise</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.hr_validation">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">hr_validation</code><span class="sig-paren">(</span><em>hr</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.hr_validation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates that the given heart rate is within physiological ranges</p>
+<p>Source for heart rate bounds: <a class="reference external" href="https://iytmed.com/dangerous-heart-rate/">https://iytmed.com/dangerous-heart-rate/</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hr</strong> (<em>int</em>) – input heart rate in bmp</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Boolean returns True if heart rate is within possible bounds</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.is_dictionary">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">is_dictionary</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.is_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an input varible is a dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> – incoming dictionary</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if the input was a dictionary and False otherwise</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.is_numeric">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">is_numeric</code><span class="sig-paren">(</span><em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.is_numeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the input variable is numeric</p>
+<p>The function converts numeric strings and floats to int. If these
+processes fail, it returns a False flag which can be used for error
+handling.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>num</strong> (<em>int</em><em> or </em><em>float</em><em> or </em><em>float</em>) – input number</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>True if the input is numeric, the input returned as an</dt>
+<dd>integer</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool, int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.patient_is_in_database">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">patient_is_in_database</code><span class="sig-paren">(</span><em>p_id</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.patient_is_in_database" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function searches the database for an input patient ID</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>p_id</strong> (<em>str</em>) – patient ID</li>
+<li><strong>database</strong> (<em>list of dict</em>) – list containing all patient and heart rate
+information</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Boolean value returns True if the patient is in the database</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.valid_email">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">valid_email</code><span class="sig-paren">(</span><em>email</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.valid_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if entered email address is valid</p>
+<p>This checks if the email address contains a “&#64;” followed by a “.”</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>email</strong> (<em>str</em>) – input email address</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if the input is a valid email and False otherwise</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.verify_input_hr">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">verify_input_hr</code><span class="sig-paren">(</span><em>df</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.verify_input_hr" title="Permalink to this definition">¶</a></dt>
+<dd><p>verifies that new heart rate information is in the correct format</p>
+<p>This function tests that the input data is a dictionary, contains
+the required keys, has an existing patient ID, and that the heart rate is
+a valid integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>dict</em>) – input dictionary for a new patient</li>
+<li><strong>database</strong> (<em>list of dict</em>) – full list of patient data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if passes all tests</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.verify_input_internal_average">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">verify_input_internal_average</code><span class="sig-paren">(</span><em>df</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.verify_input_internal_average" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>verifies that the data structures posted to the input_internal_average</dt>
+<dd>function is in the correct format</dd>
+</dl>
+<p>This function tests that the input data is a dictionary, contains
+the required keys, has a valid email, and that the patient’s age is a valid
+integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>dict</em>) – input dictionary for a new patient</li>
+<li><strong>database</strong> (<em>list of dict</em>) – full list of patient data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if passes all tests</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.verify_inputs.verify_new_patient">
+<code class="descclassname">functions.verify_inputs.</code><code class="descname">verify_new_patient</code><span class="sig-paren">(</span><em>df</em>, <em>database</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.verify_inputs.verify_new_patient" title="Permalink to this definition">¶</a></dt>
+<dd><p>verifies that new patient information is in the correct format</p>
+<p>This function tests that the input data is a dictionary, contains
+the required keys, has a valid email, and that the patient’s age is a valid
+integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>dict</em>) – input dictionary for a new patient</li>
+<li><strong>database</strong> (<em>list of dict</em>) – full list of patient data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if passes all tests</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-functions">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-functions" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Matt Holbrook
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

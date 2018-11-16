@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>client module &mdash; Heart Rate Sentinel  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Heart Rate Sentinel
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">client module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Heart Rate Sentinel</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>client module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/client.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-client">
+<span id="client-module"></span><h1>client module<a class="headerlink" href="#module-client" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="client.average">
+<code class="descclassname">client.</code><code class="descname">average</code><span class="sig-paren">(</span><em>patient_id</em><span class="sig-paren">)</span><a class="headerlink" href="#client.average" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the average heart rate for each patient.
+This function works on all of the recorded heart rates (bmp) for a given
+patient.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>patient_id</strong> (<em>str</em>) – the patient identifier</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">returns a json dictionary with the average heart rate</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JSON</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="client.get_heart_rate">
+<code class="descclassname">client.</code><code class="descname">get_heart_rate</code><span class="sig-paren">(</span><em>patient_id</em><span class="sig-paren">)</span><a class="headerlink" href="#client.get_heart_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves and returns all recorded heart rates for a patient</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>patient_id</strong> (<em>str</em>) – the patient ID to which to show recorded heart rates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">message showing all recorded heart rates for a patient</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JSON</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="client.internal_average">
+<code class="descclassname">client.</code><code class="descname">internal_average</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.internal_average" title="Permalink to this definition">¶</a></dt>
+<dd><p>API call to calculate the average heart rate for a patient after a
+timestamp</p>
+<p>This message receives a post in the following format:</p>
+<p>{</p>
+<p>“patient_id”: “1”,</p>
+<p>“heart_rate_average_since”: “2018-03-09 11:00:36.372339” // date string</p>
+<p>}</p>
+<p>The patient ID must be entered as a string.</p>
+<p>The date string must a string entered in the following format:
+“%Y-%m-%d %H:%M:%S.%f”</p>
+<p>The patient’s recorded heart rates after “heart_rate_average_since” will be
+used for calculating an average. If there are no measurements after this
+point an warning is raised and the last recorded heart rate is returned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="client.new_patient">
+<code class="descclassname">client.</code><code class="descname">new_patient</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.new_patient" title="Permalink to this definition">¶</a></dt>
+<dd><p>API call to register a new patient
+This is called when the heart rate monitor is checked out with a new
+patient, and initializes the patient in the database.</p>
+<p>An example POST:</p>
+<p>{</p>
+<p>“patient_id”: “1”, # usually this would be the patient MRN</p>
+<p>“attending_email”: “<a class="reference external" href="mailto:suyash&#46;kumar&#37;&#52;&#48;duke&#46;edu">suyash<span>&#46;</span>kumar<span>&#64;</span>duke<span>&#46;</span>edu</a>”,</p>
+<p>“user_age”: 50, # in years</p>
+<p>}</p>
+<p>The patient ID must be entered as a string.</p>
+<p>The attending email must be a string.</p>
+<p>The patient age must be an integer.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="client.post_heart_rate">
+<code class="descclassname">client.</code><code class="descname">post_heart_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.post_heart_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>API call to store a heart rate measurement for a given patient.
+This is called to store a heart rate for a patient identified with
+patient_id.</p>
+<p>An example POST:</p>
+<p>{</p>
+<p>“patient_id”: “1”, # usually this would be the patient MRN</p>
+<p>“heart_rate”: 100</p>
+<p>}</p>
+<p>The patient ID must be entered as a string.</p>
+<p>The heart rate must be an integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="client.status">
+<code class="descclassname">client.</code><code class="descname">status</code><span class="sig-paren">(</span><em>patient_id</em><span class="sig-paren">)</span><a class="headerlink" href="#client.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks and returns whether the called patient is currently tachycardic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>patient_id</strong> (<em>str</em>) – MRN number of the patient</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dictionary with whether the patient is tachycardic and the
+timestamp of the last heart rate measurement</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JSON</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Matt Holbrook
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

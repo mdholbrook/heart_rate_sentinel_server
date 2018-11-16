@@ -49,6 +49,19 @@ def verify_new_patient(df, database):
 
 
 def verify_input_hr(df, database):
+    """verifies that new heart rate information is in the correct format
+
+    This function tests that the input data is a dictionary, contains
+    the required keys, has an existing patient ID, and that the heart rate is
+    a valid integer.
+
+    Args:
+        df (dict): input dictionary for a new patient
+        database (list of dict): full list of patient data
+
+    Returns:
+        bool: True if passes all tests
+    """
 
     # Find if df is a dictionary
     if not is_dictionary(df):
@@ -79,6 +92,20 @@ def verify_input_hr(df, database):
 
 
 def verify_input_internal_average(df, database):
+    """verifies that the data structures posted to the input_internal_average
+     function is in the correct format
+
+    This function tests that the input data is a dictionary, contains
+    the required keys, has a valid email, and that the patient's age is a valid
+    integer.
+
+    Args:
+        df (dict): input dictionary for a new patient
+        database (list of dict): full list of patient data
+
+    Returns:
+        bool: True if passes all tests
+    """
 
     # Find if df is a dictionary
     if not is_dictionary(df):
@@ -172,14 +199,18 @@ def valid_email(email):
 
 
 def is_numeric(num):
-    """Checks if the input variable is numeric (int)
+    """Checks if the input variable is numeric
+
+    The function converts numeric strings and floats to int. If these
+    processes fail, it returns a False flag which can be used for error
+    handling.
 
     Args:
-        num:
+        num (int or float or float): input number
 
     Returns:
-        bool: True if the input is numeric or numeric
-        num (int): the input returned as an integer
+        bool, int: True if the input is numeric, the input returned as an
+            integer
     """
     # Get data type
     t = type(num)
@@ -205,7 +236,7 @@ def hr_validation(hr):
         hr (int): input heart rate in bmp
 
     Returns:
-        bool: True if heart rate is within possible bounds
+        bool: Boolean returns True if heart rate is within possible bounds
     """
 
     hr_upper_bound = 480    # Ventricular tachycardia
@@ -219,6 +250,16 @@ def hr_validation(hr):
 
 
 def patient_is_in_database(p_id, database):
+    """This function searches the database for an input patient ID
+
+    Args:
+        p_id (str): patient ID
+        database (list of dict): list containing all patient and heart rate
+            information
+
+    Returns:
+        bool: Boolean value returns True if the patient is in the database
+    """
 
     # Get a list of IDs in database
     ids = [database[i]['patient_id'] for i in range(len(database))]
@@ -235,8 +276,10 @@ def patient_is_in_database(p_id, database):
 
 def check_date_format(date):
     """Checks the formatting of the posted date
+
     The date should be in the format: "%Y-%m-%d %H:%M:%S.%f" (eg.
     '2018-03-09 11:00:36.372339'). Returns False if this is not the case.
+
     Args:
         date (str): input date as a string
 
