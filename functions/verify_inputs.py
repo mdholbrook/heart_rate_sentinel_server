@@ -1,4 +1,6 @@
+import logging
 import re
+logging.basicConfig(filename='server.log', level=logging.DEBUG)
 
 
 def verify_new_patient(df, database):
@@ -18,6 +20,7 @@ def verify_new_patient(df, database):
 
     # Find if df is a dictionary
     if not is_dictionary(df):
+        logging.warning('Input new patient data is not a dictionary!')
         raise TypeError('Input new patient data is not a dictionary!')
 
     # Ensure the required keys exist
@@ -25,12 +28,16 @@ def verify_new_patient(df, database):
 
     for required_key in required_keys:
         if not contains_key(required_key, df):
+            logging.warning('Input new patient dictionary is missing key %s!'
+                            % required_key)
             raise TypeError('Input new patient dictionary is missing key %s!'
                             % required_key)
 
     # Check that the email is valid
     email = df[required_keys[1]]
     if not valid_email(email):
+        logging.warning('Input email address (%s) is invalid!'
+                        % email)
         raise ValueError('Input email address (%s) is invalid!'
                          % email)
 
@@ -38,12 +45,15 @@ def verify_new_patient(df, database):
     age = df[required_keys[2]]
     t, df[required_keys[2]] = is_numeric(age)
     if not t:
+        logging.warning('Input age (%s) must be an integer!' % age)
         TypeError('Input age (%s) must be an integer!' % age)
 
     # Check if patient exists in the database
     if len(database) > 0:
         p_id = df[required_keys[0]]
         if patient_is_in_database(p_id, database):
+            logging.warning('The input patient ID (%s) is already in the '
+                            'database!' % p_id)
             raise ValueError('The input patient ID (%s) is already in the '
                              'database!' % p_id)
 
@@ -65,13 +75,15 @@ def verify_input_hr(df, database):
 
     # Find if df is a dictionary
     if not is_dictionary(df):
-        raise ValueError('Input heart rate data is not a dictionary!')
+        raise ValueError('Input data is not a dictionary!')
 
     # Ensure the required keys exist
     required_keys = ['patient_id', 'heart_rate']
 
     for required_key in required_keys:
         if not contains_key(required_key, df):
+            logging.warning('Input dictionary is missing key %s!'
+                            % required_key)
             raise ValueError('Input dictionary is missing key %s!'
                              % required_key)
 
@@ -109,13 +121,16 @@ def verify_input_internal_average(df, database):
 
     # Find if df is a dictionary
     if not is_dictionary(df):
-        raise ValueError('Input heart rate data is not a dictionary!')
+        logging.warning('Input data is not a dictionary!')
+        raise ValueError('Input data is not a dictionary!')
 
     # Ensure the required keys exist
     required_keys = ['patient_id', 'heart_rate_average_since']
 
     for required_key in required_keys:
         if not contains_key(required_key, df):
+            logging.warning('Input dictionary is missing key %s!'
+                            % required_key)
             raise ValueError('Input dictionary is missing key %s!'
                              % required_key)
 
@@ -123,17 +138,23 @@ def verify_input_internal_average(df, database):
     if len(database) > 0:
         p_id = df[required_keys[0]]
         if not patient_is_in_database(p_id, database):
+            logging.warning('The input patient ID (%s) is not in the '
+                            'database!' % p_id)
             raise ValueError('The input patient ID (%s) is not in the '
                              'database!' % p_id)
     else:
+        logging.warning('There are no patients entered in the directory!')
         raise LookupError('There are no patients entered in the directory!')
 
     # Check that the date is in the correct format
     date = df[required_keys[1]]
     if not type(date) == str:
+        logging.warning("Please enter the date as a string!")
         raise ValueError("Please enter the date as a string!")
 
     if not check_date_format(date):
+        logging.warning("Entered date, %s, is not in the correct format.\n"
+                        "Please enter date as: '2018-03-09 11:00:36.372339'")
         raise ValueError("Entered date, %s, is not in the correct format.\n"
                          "Please enter date as: '2018-03-09 11:00:36.372339'")
 
