@@ -23,10 +23,9 @@ def send_tachycardia_email(df):
     subject = "TACHYCARDIA ALERT: %s" % df['patient_id']
 
     # Set up email body
-    body = Content("text/plain", "Patient: %s\n"
-                                 "Age: %s\n"
-                                 "Heart rate: %s\n"
-                                 "Timestamp: %s"
+    body = Content("text/plain", "Patient: %s "
+                                 "(age: %s\n) has a heart rate of "
+                                 "%s at %s"
                                  % (df['patient_id'],
                                     df['user_age'],
                                     df['heart_rate'][-1],
