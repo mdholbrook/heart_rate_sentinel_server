@@ -10,7 +10,7 @@ class Tachycardic:
         # Load reference data
         df = {'Year1': [1, 3, 5, 8, 12, 15],
               'Year2': [2, 4, 7, 11, 15, 200],
-               'BMP': [151, 137, 133, 130, 119, 100]}
+              'BMP': [151, 137, 133, 130, 119, 100]}
         # self.df = pd.read_csv(data_dir)
         self.df = pd.DataFrame.from_dict(df)
 
