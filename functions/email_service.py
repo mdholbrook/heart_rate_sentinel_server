@@ -5,13 +5,16 @@ from sendgrid.helpers.mail import *
 
 def send_tachycardia_email(df):
     """Sends an email to the attending physician
-    The email warns of a tachycardic heart rate.
+
+    The email warns of a tachycardic heart rate and includes the patient ID,
+    age, current heart rate, and the time that the heart rate was recorded.
 
     Args:
-        df (dict): dictionary of patient data
+        df (dict): dictionary containing the tachycardic patient information
+            and heart rate data.
 
     Returns:
-
+        None
     """
 
     # Set up email

@@ -18,16 +18,27 @@ tachy = Tachycardic()
 
 @app.route('/api/new_patient', methods=['POST'])
 def new_patient():
-    """Registers a new patient
+    """API call to register a new patient
     This is called when the heart rate monitor is checked out with a new
     patient, and initializes the patient in the database.
 
-    An example POST is:
+    An example POST:
+
     {
+
     "patient_id": "1", # usually this would be the patient MRN
+
     "attending_email": "suyash.kumar@duke.edu",
+
     "user_age": 50, # in years
+
     }
+
+    The patient ID must be entered as a string.
+
+    The attending email must be a string.
+
+    The patient age must be an integer.
     """
     global database
 
@@ -62,15 +73,26 @@ def new_patient():
 
 @app.route('/api/heart_rate', methods=['POST'])
 def post_heart_rate():
-    """Stores a heart rate measurement for a given patient.
+    """API call to store a heart rate measurement for a given patient.
     This is called to store a heart rate for a patient identified with
     patient_id.
 
-    An example POST is:
+    An example POST:
+
     {
+
     "patient_id": "1", # usually this would be the patient MRN
+
     "heart_rate": 100
+
     }
+
+    The patient ID must be entered as a string.
+
+    The heart rate must be an integer.
+
+    Returns:
+        None
     """
     global database
 
@@ -95,20 +117,30 @@ def post_heart_rate():
 
 @app.route('/api/heart_rate/internal_average', methods=['POST'])
 def internal_average():
-    """Calculates the average heart rate for a patient after a given timestamp
+    """API call to calculate the average heart rate for a patient after a
+    timestamp
 
     This message receives a post in the following format:
+
     {
+
     "patient_id": "1",
+
     "heart_rate_average_since": "2018-03-09 11:00:36.372339" // date string
+
     }
+
+    The patient ID must be entered as a string.
+
+    The date string must a string entered in the following format:
+    "%Y-%m-%d %H:%M:%S.%f"
 
     The patient's recorded heart rates after "heart_rate_average_since" will be
     used for calculating an average. If there are no measurements after this
     point an warning is raised and the last recorded heart rate is returned.
 
     Returns:
-
+        None
     """
     global database
 
@@ -139,13 +171,14 @@ def internal_average():
 
 @app.route('/api/status/<patient_id>', methods=['GET'])
 def status(patient_id):
-    """Checks whether the called patient is currently tachycardic
+    """Checks and returns whether the called patient is currently tachycardic
 
     Args:
         patient_id (str): MRN number of the patient
 
     Returns:
-
+        JSON: dictionary with whether the patient is tachycardic and the
+        timestamp of the last heart rate measurement
     """
 
     # Check if patient is in database
@@ -163,13 +196,13 @@ def status(patient_id):
 
 @app.route('/api/heart_rate/<patient_id>', methods=['GET'])
 def get_heart_rate(patient_id):
-    """Shows all recorded heart rates for a patient
+    """Retrieves and returns all recorded heart rates for a patient
 
     Args:
         patient_id (str): the patient ID to which to show recorded heart rates
 
     Returns:
-        json: message showing all recorded heart rates for a patient
+        JSON: message showing all recorded heart rates for a patient
     """
     # Check if patient is in database
     if not patient_is_in_database(patient_id, database):
@@ -193,7 +226,7 @@ def average(patient_id):
         patient_id (str): the patient identifier
 
     Returns:
-        json: returns a json dictionary with the average heart rate
+        JSON: returns a json dictionary with the average heart rate
     """
     # Check if patient is in database
     if not patient_is_in_database(patient_id, database):

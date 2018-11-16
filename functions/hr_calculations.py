@@ -10,7 +10,9 @@ def append_heart_rate(df, database):
         database (list of dict): list containing all patient data
 
     Returns:
-        list: updates database to include the send heart rate
+        list of dict, int: updates database to include the heart rate, also
+            return the index of the patient in the database so that the patient
+            ID will not have to be found again for following calculations
     """
 
     # Get patient index in database

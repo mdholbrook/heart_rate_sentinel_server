@@ -8,7 +8,11 @@ class Tachycardic:
         data_dir = 'functions/tachy_data.csv'
 
         # Load reference data
-        self.df = pd.read_csv(data_dir)
+        df = {'Year1': [1, 3, 5, 8, 12, 15],
+              'Year2': [2, 4, 7, 11, 15, 200],
+               'BMP': [151, 137, 133, 130, 119, 100]}
+        # self.df = pd.read_csv(data_dir)
+        self.df = pd.DataFrame.from_dict(df)
 
     def is_tachycardic(self, patient_id, database):
         """Computes if the patient is tachycardic
@@ -46,7 +50,7 @@ class Tachycardic:
             return False, timestamp
 
     def find_age(self, database, ind):
-        """Finds the patient's age
+        """Finds the patient's age from the database
 
         Args:
             database (list of dict): a list of patients and their information
@@ -59,7 +63,7 @@ class Tachycardic:
         return database[ind]['user_age']
 
     def get_heart_rate(self, database, ind):
-        """Finds the patient's last heart rate
+        """Finds the patient's last heart rate in the database
 
         Args:
             database (list of dict): a list of patients and their information
